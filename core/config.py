@@ -5,7 +5,7 @@ class Settings(BaseSettings):
 
     """Class that defines pydantic validation"""
 
-    google_api_key: str
+    gemini_api_key: str
 
     model_name: str = "gemini-2.5-flash"
 
@@ -27,3 +27,7 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+print("API key loaded:", bool(settings.gemini_api_key))
+print("API key length:", len(settings.gemini_api_key))
+print("Model:", settings.model_name)

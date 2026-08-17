@@ -10,7 +10,7 @@ class LLMService:
     def __init__(self):
         self.model = ChatGoogleGenerativeAI(
             model=settings.model_name,
-            google_api_key=settings.google_api_key,
+            api_key=settings.gemini_api_key,
             temperature=0.2,
         )
 

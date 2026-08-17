@@ -18,7 +18,7 @@ llm_service = LLMService()
 def chat(request: ChatRequest):
 
     results = retrieve_documents(
-        request.message
+        request.question
     )
 
     context_parts = []
@@ -48,11 +48,11 @@ def chat(request: ChatRequest):
     )
 
     response = llm_service.generate(
-        message=request.message,
+        message=request.question,
         context=context,
     )
 
     return ChatResponse(
-        response=response,
+        answer=response,
         sources=sources,
     )

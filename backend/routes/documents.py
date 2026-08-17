@@ -39,17 +39,17 @@ async def upload_document(file: UploadFile = File(...)):
     file_path.write_bytes(content)
 
     try:
-        # 1. Load
+
         documents = load_document(
             str(file_path)
         )
 
-        # 2. Split
+     
         chunks = split_documents(
             documents
         )
 
-        # 3. Store embeddings
+       
         vectorstore = get_vectorstore()
 
         vectorstore.add_documents(
