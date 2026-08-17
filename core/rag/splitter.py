@@ -13,7 +13,7 @@ def split_documents(documents):
 
     chunks = splitter.split_documents(documents)
 
-     print(f"Number of chunks: {len(chunks)}")
+    print(f"Number of chunks: {len(chunks)}")
 
     for i, chunk in enumerate(chunks):
             print(f"\n--- CHUNK {i} ---")

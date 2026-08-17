@@ -1,0 +1,2 @@
+Selected chunking strategy: 800 characters with 120-character overlap.
+Experiments with 600, 800, and 1000 character chunks showed that all configurations could retrieve relevant information, while 800/120 provided a practical balance between focused retrieval and preservation of contextual information. The 800/120 configuration also achieved correct, grounded responses across all seven end-to-end test cases.

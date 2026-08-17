@@ -13,7 +13,7 @@ class Settings(BaseSettings):
         "sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    chunk_size: int = 800
+    chunk_size: int = 600
 
     chunk_overlap: int = 120
 
