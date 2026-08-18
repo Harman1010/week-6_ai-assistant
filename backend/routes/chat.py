@@ -4,6 +4,7 @@ from backend.schemas.chat import ChatRequest,ChatResponse,Source
 
 from core.llm.service import LLMService
 from core.rag.retriever import retrieve_documents
+from core.memory.service import MemoryService
 
 
 router = APIRouter(
@@ -12,10 +13,13 @@ router = APIRouter(
 )
 
 llm_service = LLMService()
+memory_service = MemoryService()
 
 
 @router.post("/", response_model=ChatResponse)
 def chat(request: ChatRequest):
+
+    history = memory_service.get_history(request.session_id)
 
     results = retrieve_documents(
         request.question
@@ -50,6 +54,19 @@ def chat(request: ChatRequest):
     response = llm_service.generate(
         message=request.question,
         context=context,
+        history=history
+    )
+
+    memory_service.add_message(
+        request.session_id,
+        "user",
+        request.question
+    )
+
+    memory_service.add_message(
+        request.session_id,
+        "assistant",
+        response
     )
 
     return ChatResponse(

@@ -6,6 +6,8 @@ class ChatRequest(BaseModel):
 
     question : str = Field(min_length=1,max_length=1000)
 
+    session_id : str = Field(min_length=1,max_length=100)
+
 class Source(BaseModel):
 
     document : str
@@ -20,4 +22,4 @@ class ChatResponse(BaseModel):
 
     answer : str
 
-    sources : list[Source] = []
+    sources : list[Source] = Field(default_factory = list)

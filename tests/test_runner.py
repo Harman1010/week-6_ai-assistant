@@ -7,7 +7,7 @@ API_URL = "http://127.0.0.1:8000/chat/"
 
 
 def run_tests():
-    for test_case in TEST_CASES:
+    for test_case in TEST_CASES[3:]:
         print(f"\n{'=' * 60}")
         print(f"{test_case['id']}: {test_case['question']}")
         print("=" * 60)

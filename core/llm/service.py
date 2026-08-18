@@ -14,7 +14,7 @@ class LLMService:
             temperature=0.2,
         )
 
-    def generate(self,message: str,context: str = ""):
+    def generate(self,message: str,context: str = "",conv_history : list | None = None):
 
         prompt = f"""
 You are a helpful AI assistant.
@@ -27,6 +27,9 @@ say that you could not find the answer in the
 uploaded documents.
 
 Do not invent information.
+
+CONVERSATION HISTORY:
+{conv_history or []}
 
 DOCUMENT CONTEXT:
 {context}
