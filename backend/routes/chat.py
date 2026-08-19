@@ -54,7 +54,7 @@ def chat(request: ChatRequest):
     response = llm_service.generate(
         message=request.question,
         context=context,
-        history=history
+        conv_history=history
     )
 
     memory_service.add_message(
