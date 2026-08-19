@@ -7,6 +7,8 @@ from core.rag.loader import load_document
 from core.rag.splitter import split_documents
 from core.rag.vectorstore import get_vectorstore
 
+import hashlib
+
 
 router = APIRouter(
     prefix="/documents",
@@ -26,6 +28,23 @@ async def upload_document(file: UploadFile = File(...)):
         )
 
     content = await file.read()
+
+    file_hash = hashlib.sha256(content).hexdigest()
+
+    vectorstore = get_vectorstore()
+
+    existing = vectorstore.get(
+        where = {"file_hash" : file_hash},limit=1
+    )
+
+    if existing["ids"]:
+
+        return {
+            "file_name" : file.filename,
+            "chunks" : 0,
+            "message" : "Document already exists. Skipping duplicates"
+        }
+
 
     upload_dir = Path("data/uploads")
     upload_dir.mkdir(
@@ -49,8 +68,11 @@ async def upload_document(file: UploadFile = File(...)):
             documents
         )
 
-       
-        vectorstore = get_vectorstore()
+        for chunk in chunks:
+
+            chunk.metadata['file_hash'] = file_hash
+
+    
 
         vectorstore.add_documents(
             chunks
