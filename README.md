@@ -4,9 +4,16 @@
 
 ## Features
 
-- Chunks well experimented
-- Conversation memory support
-- Containerization using Docker
+- RAG-based document question answering
+- Experimented document chunking strategy
+- Semantic search using Chroma
+- Source citation with retrieved document metadata
+- Support for PDF, TXT, and Markdown documents
+- SHA-256 based duplicate document detection
+- Session-based conversation memory
+- FastAPI backend
+- Gradio frontend
+- Docker-based isolated environment
 
 ---
 
@@ -102,25 +109,76 @@ AI-Assistant/
 
 ## Setup Guide
 
+1. Clone the repository
 
+```powershell
 
+git clone <repository-url>
+cd AI-Assistant
 
+```
 
+2. Create a virtual environment
 
+```powershell
+
+python -m venv venv
+
+```
+
+3. Activate virtual environment
+
+```powershell 
+
+venv/Scripts/Activate.ps1
+
+```
+
+4. Create .env file (Refer to .env.example)
+
+```powershell
+
+GEMINI_API_KEY=your_api_key
+
+```
+
+5. Start the FastAPI Backend
+
+```powershell
+
+uvicorn backend.main:app
+
+```
+
+6. Start the frontend
+
+```powershell
+
+python -m frontend.app
+
+```
+---
+
+## Limitations
+
+- Retrieval strategy is currently limited to semantic search.
+- Agentic RAG is not supported.
+- Conversation memory is currently session-based and in-memory.
+- No persistent user authentication or user-specific document isolation.
+- Retrieval evaluation is currently primarily qualitative rather than based on formal retrieval metrics.
 
 ---
 
 
-
-
-## Limitations
-
-- Retrieval strategy is only semantic search
-- Agentic RAG is not supported
-
-
 ## Future Improvements
 
-- Add Latency , Cost Optimization
-- Support Cache
-- LLM Gateways
+- Hybrid search combining semantic and keyword retrieval
+- Reranking retrieved documents
+- Formal retrieval evaluation metrics
+- Latency and cost optimization
+- Response caching
+- LLM gateways
+- Persistent conversation storage
+- User authentication and document-level access control
+- Agentic RAG
+- Production-ready deployment and monitoring
